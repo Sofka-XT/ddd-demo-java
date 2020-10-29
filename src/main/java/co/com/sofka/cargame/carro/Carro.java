@@ -1,11 +1,12 @@
-package co.com.sofka.cargame.car;
+package co.com.sofka.cargame.carro;
 
-import co.com.sofka.cargame.car.events.CarroCreado;
-import co.com.sofka.cargame.car.events.ConductorAsignado;
-import co.com.sofka.cargame.car.events.KilometrajeCambiado;
-import co.com.sofka.cargame.car.values.Cedula;
-import co.com.sofka.cargame.car.values.Color;
-import co.com.sofka.cargame.car.values.CarroId;
+import co.com.sofka.cargame.carro.events.CarroCreado;
+import co.com.sofka.cargame.carro.events.ConductorAsignado;
+import co.com.sofka.cargame.carro.events.KilometrajeCambiado;
+import co.com.sofka.cargame.carro.values.Cedula;
+import co.com.sofka.cargame.carro.values.Color;
+import co.com.sofka.cargame.carro.values.CarroId;
+import co.com.sofka.cargame.carril.CarrilId;
 import co.com.sofka.domain.generic.AggregateEvent;
 import co.com.sofka.domain.generic.DomainEvent;
 
@@ -38,8 +39,9 @@ public class Carro extends AggregateEvent<CarroId> {
         appendChange(new ConductorAsignado(nombre, cedula)).apply();
     }
 
-    public void cambiarKilometraje(Integer distancia){
-        appendChange(new KilometrajeCambiado(distancia)).apply();
+
+    public void cambiarKilometraje(CarrilId carrilId,Integer distancia){
+        appendChange(new KilometrajeCambiado(distancia, carrilId)).apply();
     }
 
 

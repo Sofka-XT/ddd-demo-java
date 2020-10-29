@@ -1,4 +1,4 @@
-package co.com.sofka.cargame.car.usecase;
+package co.com.sofka.cargame.usecase;
 
 import co.com.sofka.domain.generic.DomainEvent;
 

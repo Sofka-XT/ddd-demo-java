@@ -1,11 +1,10 @@
-package co.com.sofka.cargame.car.usecase;
+package co.com.sofka.cargame.usecase;
 
 import co.com.sofka.business.generic.UseCase;
 import co.com.sofka.business.support.RequestCommand;
 import co.com.sofka.business.support.ResponseEvents;
-import co.com.sofka.cargame.car.Carro;
-import co.com.sofka.cargame.car.Conductor;
-import co.com.sofka.cargame.car.command.AsignarConductorCommand;
+import co.com.sofka.cargame.carro.Carro;
+import co.com.sofka.cargame.carro.command.AsignarConductorCommand;
 
 public class AsignarConductorUseCase extends UseCase<RequestCommand<AsignarConductorCommand>, ResponseEvents> {
     @Override

@@ -1,4 +1,4 @@
-package co.com.sofka.cargame.car.values;
+package co.com.sofka.cargame.carro.values;
 
 import co.com.sofka.domain.generic.ValueObject;
 

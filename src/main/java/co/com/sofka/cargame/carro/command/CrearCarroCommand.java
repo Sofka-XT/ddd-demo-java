@@ -1,7 +1,7 @@
-package co.com.sofka.cargame.car.command;
+package co.com.sofka.cargame.carro.command;
 
-import co.com.sofka.cargame.car.values.Color;
-import co.com.sofka.cargame.car.values.CarroId;
+import co.com.sofka.cargame.carro.values.Color;
+import co.com.sofka.cargame.carro.values.CarroId;
 import co.com.sofka.domain.generic.Command;
 
 public class CrearCarroCommand implements Command {

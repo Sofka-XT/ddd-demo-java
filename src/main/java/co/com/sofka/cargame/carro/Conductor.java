@@ -1,7 +1,7 @@
-package co.com.sofka.cargame.car;
+package co.com.sofka.cargame.carro;
 
 
-import co.com.sofka.cargame.car.values.Cedula;
+import co.com.sofka.cargame.carro.values.Cedula;
 import co.com.sofka.domain.generic.Entity;
 
 import java.util.Objects;

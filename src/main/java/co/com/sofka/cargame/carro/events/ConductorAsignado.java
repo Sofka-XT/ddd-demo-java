@@ -1,7 +1,6 @@
-package co.com.sofka.cargame.car.events;
+package co.com.sofka.cargame.carro.events;
 
-import co.com.sofka.cargame.car.Conductor;
-import co.com.sofka.cargame.car.values.Cedula;
+import co.com.sofka.cargame.carro.values.Cedula;
 import co.com.sofka.domain.generic.DomainEvent;
 
 public class ConductorAsignado extends DomainEvent {

@@ -1,7 +1,7 @@
-package co.com.sofka.cargame.car.events;
+package co.com.sofka.cargame.carro.events;
 
-import co.com.sofka.cargame.car.values.Color;
-import co.com.sofka.cargame.car.values.CarroId;
+import co.com.sofka.cargame.carro.values.Color;
+import co.com.sofka.cargame.carro.values.CarroId;
 import co.com.sofka.domain.generic.DomainEvent;
 
 public class CarroCreado extends DomainEvent {
