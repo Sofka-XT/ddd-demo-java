@@ -2,14 +2,14 @@ package co.com.sofka.cargame.usecase;
 
 import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.support.TriggeredEvent;
-import co.com.sofka.cargame.carril.events.CarroAgregadoACarrail;
-import co.com.sofka.cargame.carril.events.CarroDesplazado;
-import co.com.sofka.cargame.carril.events.CarroFinalizoSuRecorrido;
-import co.com.sofka.cargame.carril.values.Posicion;
-import co.com.sofka.cargame.carro.events.KilometrajeCambiado;
-import co.com.sofka.cargame.carril.events.CarrilCreado;
-import co.com.sofka.cargame.carril.values.CarrilId;
-import co.com.sofka.cargame.carro.values.CarroId;
+import co.com.sofka.cargame.aggregate.carril.events.CarroAgregadoACarrail;
+import co.com.sofka.cargame.aggregate.carril.events.CarroDesplazado;
+import co.com.sofka.cargame.aggregate.carril.events.CarroFinalizoSuRecorrido;
+import co.com.sofka.cargame.aggregate.carril.values.Posicion;
+import co.com.sofka.cargame.aggregate.carro.events.KilometrajeCambiado;
+import co.com.sofka.cargame.aggregate.carril.events.CarrilCreado;
+import co.com.sofka.cargame.aggregate.carril.values.CarrilId;
+import co.com.sofka.cargame.aggregate.carro.values.CarroId;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
