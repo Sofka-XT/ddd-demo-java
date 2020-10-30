@@ -26,7 +26,8 @@ class MoverCarroEnCarrilUseCaseTest extends UseCaseHandleBaseTest {
         var event =   new KilometrajeCambiado(20, CarrilId.of("xxxx-xxxx"));
 
         when(repository.getEventsBy(anyString())).thenReturn(List.of(
-                new CarrilCreado(500)
+                new CarrilCreado(500),
+                new CarroAgregadoACarrail(CarroId.of("fffff-ffff"))
         ));
 
         usecase.addRepository(repository);
