@@ -1,4 +1,4 @@
-package co.com.sofka.cargame.carril;
+package co.com.sofka.cargame.carril.values;
 
 import co.com.sofka.domain.generic.Identity;
 

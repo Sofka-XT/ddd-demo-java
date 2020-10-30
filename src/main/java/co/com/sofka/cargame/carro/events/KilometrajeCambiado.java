@@ -1,6 +1,6 @@
 package co.com.sofka.cargame.carro.events;
 
-import co.com.sofka.cargame.carril.CarrilId;
+import co.com.sofka.cargame.carril.values.CarrilId;
 import co.com.sofka.domain.generic.DomainEvent;
 import co.com.sofka.domain.generic.Incremental;
 
