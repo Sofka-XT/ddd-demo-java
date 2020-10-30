@@ -60,11 +60,11 @@ public class Juego extends AggregateEvent<JuegoId> {
         return pista.value();
     }
 
-    public Boolean getJugando() {
+    public Boolean jugando() {
         return jugando;
     }
 
-    public Podio.Props getPodio() {
+    public Podio.Props podio() {
         return podio.value();
     }
 }
