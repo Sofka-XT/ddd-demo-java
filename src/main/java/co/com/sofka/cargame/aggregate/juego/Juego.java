@@ -31,7 +31,7 @@ public class Juego extends AggregateEvent<JuegoId> {
         return juego;
     }
 
-    public void crearJugado(Nombre nombre) {
+    public void crearJugador(Nombre nombre) {
         appendChange(new JugadorCreado(nombre)).apply();
     }
 
