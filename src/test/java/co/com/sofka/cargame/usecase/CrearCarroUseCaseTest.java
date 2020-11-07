@@ -1,30 +1,41 @@
 package co.com.sofka.cargame.usecase;
 
 import co.com.sofka.business.generic.UseCaseHandler;
-import co.com.sofka.business.support.RequestCommand;
-import co.com.sofka.cargame.aggregate.carro.command.CrearCarroCommand;
-import co.com.sofka.cargame.aggregate.carro.events.CarroCreado;
-import co.com.sofka.cargame.aggregate.carro.values.CarroId;
-import co.com.sofka.cargame.aggregate.carro.values.Color;
+import co.com.sofka.business.support.TriggeredEvent;
+import co.com.sofka.cargame.domain.carro.events.CarroCreado;
+import co.com.sofka.cargame.domain.Color;
+import co.com.sofka.cargame.domain.juego.events.JugadorCreado;
+import co.com.sofka.cargame.domain.juego.values.JugadorId;
+import co.com.sofka.cargame.domain.juego.values.Nombre;
+import co.com.sofka.cargame.usecase.listeners.CrearCarroUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Objects;
+
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 class CrearCarroUseCaseTest extends UseCaseHandleBaseTest{
     @Test
-    void crearCarro_casoFiles(){
+    void crearCarro_casoFeliz(){
         var useCase = new CrearCarroUseCase();
-        var command = new CrearCarroCommand(CarroId.of("XF332"), new Color("Red"));
+        var event = new JugadorCreado(
+                JugadorId.of("xxx-fff"),
+                new Nombre("Raul .A Alzate"),
+                new Color("Red")
+        );
+        event.setAggregateRootId("ggg-ggg");
+
         UseCaseHandler.getInstance()
-                .setIdentifyExecutor("xxxxx")
-                .asyncExecutor(useCase, new RequestCommand<>(command))
+                .setIdentifyExecutor("xxx-ffff")
+                .asyncExecutor(useCase, new TriggeredEvent<>(event))
                 .subscribe(subscriber);
 
-        verify(subscriber).onNext(eventCaptor.capture());
+        verify(subscriber, times(2)).onNext(eventCaptor.capture());
 
-        var event = (CarroCreado)eventCaptor.getValue();
-        Assertions.assertEquals("Red", event.getColor().value());
-        Assertions.assertEquals("XF332", event.getPlaca().value());
+        var carroCreado = (CarroCreado)eventCaptor.getAllValues().get(0);
+        Assertions.assertEquals("Red", carroCreado.getColor().value());
+        Assertions.assertTrue(Objects.nonNull(carroCreado.getPlaca()));
     }
 }

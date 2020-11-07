@@ -1,0 +1,11 @@
+server:
+  port: 8080
+  origin: ${ORIGIN:*}
+spring:
+  application:
+    name: cargame
+  data:
+    mongodb:
+      uri: ${MONGO_URI:mongodb://localhost:27017/cargame}
+  nats:
+    uri: ${NATS_URI:nats://localhost:4222}

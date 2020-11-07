@@ -2,14 +2,16 @@ package co.com.sofka.cargame.usecase;
 
 import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.support.TriggeredEvent;
-import co.com.sofka.cargame.aggregate.carril.events.CarroAgregadoACarrail;
-import co.com.sofka.cargame.aggregate.carril.events.CarroDesplazado;
-import co.com.sofka.cargame.aggregate.carril.events.CarroFinalizoSuRecorrido;
-import co.com.sofka.cargame.aggregate.carril.values.Posicion;
-import co.com.sofka.cargame.aggregate.carro.events.KilometrajeCambiado;
-import co.com.sofka.cargame.aggregate.carril.events.CarrilCreado;
-import co.com.sofka.cargame.aggregate.carril.values.CarrilId;
-import co.com.sofka.cargame.aggregate.carro.values.CarroId;
+import co.com.sofka.cargame.domain.carril.events.CarroAgregadoACarrail;
+import co.com.sofka.cargame.domain.carril.events.CarroDesplazado;
+import co.com.sofka.cargame.domain.carril.events.CarroFinalizoSuRecorrido;
+import co.com.sofka.cargame.domain.carril.values.Posicion;
+import co.com.sofka.cargame.domain.carro.events.KilometrajeCambiado;
+import co.com.sofka.cargame.domain.carril.events.CarrilCreado;
+import co.com.sofka.cargame.domain.carril.values.CarrilId;
+import co.com.sofka.cargame.domain.carro.values.CarroId;
+import co.com.sofka.cargame.domain.juego.values.JuegoId;
+import co.com.sofka.cargame.usecase.listeners.MoverCarroEnCarrilUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +28,7 @@ class MoverCarroEnCarrilUseCaseTest extends UseCaseHandleBaseTest {
         var event =   new KilometrajeCambiado(20, CarrilId.of("xxxx-xxxx"));
 
         when(repository.getEventsBy(anyString())).thenReturn(List.of(
-                new CarrilCreado(500),
+                new CarrilCreado(500, JuegoId.of("xxx-xxx")),
                 new CarroAgregadoACarrail(CarroId.of("fffff-ffff"))
         ));
 
@@ -48,7 +50,7 @@ class MoverCarroEnCarrilUseCaseTest extends UseCaseHandleBaseTest {
         var event =   new KilometrajeCambiado(101, CarrilId.of("xxxx-xxxx"));
 
         when(repository.getEventsBy(anyString())).thenReturn(List.of(
-                new CarrilCreado(500),
+                new CarrilCreado(500, JuegoId.of("xxx-xxx")),
                 new CarroAgregadoACarrail(CarroId.of("fffff-ffff")),
                 new CarroDesplazado(new Posicion(300, 500)),
                 new CarroDesplazado(new Posicion(100, 500))
