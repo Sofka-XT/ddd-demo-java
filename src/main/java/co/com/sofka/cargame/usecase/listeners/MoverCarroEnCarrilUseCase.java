@@ -20,7 +20,6 @@ public class MoverCarroEnCarrilUseCase extends UseCase<TriggeredEvent<Kilometraj
         var nuevaPosicion = event.getDistancia();
         var events = retrieveEvents();
         var carril = Carril.from(event.getCarrilId(),events);
-        System.out.println(events);
         logger.log(Level.INFO, "####### El en movimiento adicionando {0} mestros", carril.posicionActual());
 
         if (carril.desplazamientoFinal().equals(Boolean.FALSE)) {

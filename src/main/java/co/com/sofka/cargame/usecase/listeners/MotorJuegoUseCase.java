@@ -13,6 +13,7 @@ import co.com.sofka.cargame.domain.juego.Juego;
 import co.com.sofka.cargame.domain.juego.events.JuegoIniciado;
 import co.com.sofka.cargame.domain.juego.values.JuegoId;
 import co.com.sofka.cargame.usecase.MoverCarroUseCase;
+import co.com.sofka.cargame.usecase.model.CarroSobreCarril;
 import co.com.sofka.cargame.usecase.services.CarrilCarroService;
 import co.com.sofka.domain.generic.DomainEvent;
 
@@ -54,7 +55,7 @@ public class MotorJuegoUseCase  extends UseCase<TriggeredEvent<JuegoIniciado>, R
                             .setIdentifyExecutor(moverCarro.getCarroId().value())
                             .asyncExecutor(moverCarroUseCase, new RequestCommand<>(moverCarro))
                             .subscribe(subscriber);
-                    esperar5Segundos();
+                    esperar2Segundos();
                 });
                 jugando = Juego.from(juegoId, retrieveEvents()).jugando();
             } while (jugando);
@@ -63,9 +64,9 @@ public class MotorJuegoUseCase  extends UseCase<TriggeredEvent<JuegoIniciado>, R
         emit().onSuccess(new ResponseEvents(List.of()));
     }
 
-    private void esperar5Segundos() {
+    private void esperar2Segundos() {
         try {
-            Thread.sleep(5000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

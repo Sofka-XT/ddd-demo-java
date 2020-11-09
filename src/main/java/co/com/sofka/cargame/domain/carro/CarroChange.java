@@ -17,8 +17,7 @@ public class CarroChange extends EventChange {
         });
 
         apply((KilometrajeCambiado event) -> {
-            var distancia = event.getDistancia();
-            Objects.requireNonNull(distancia, "La distancia no puede ser null");
+            var distancia = Objects.requireNonNull(event.getDistancia(), "La distancia no puede ser null");
             if (distancia <= 0) {
                 throw new IllegalArgumentException("No puede ser negativo o cero el valod de la distancia");
             }
