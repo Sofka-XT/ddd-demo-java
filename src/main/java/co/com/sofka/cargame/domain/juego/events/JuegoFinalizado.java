@@ -7,12 +7,12 @@ import co.com.sofka.domain.generic.Incremental;
 public class JuegoFinalizado extends DomainEvent implements Incremental {
     private final Podio podio;
 
-    public Podio getPodio() {
-        return podio;
-    }
-
     public JuegoFinalizado(Podio podio) {
         super("juego.JuegoFinalizado");
         this.podio = podio;
+    }
+
+    public Podio getPodio() {
+        return podio;
     }
 }

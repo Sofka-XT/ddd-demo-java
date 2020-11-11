@@ -1,12 +1,12 @@
 package co.com.sofka.cargame.domain.carro;
 
+import co.com.sofka.cargame.domain.Color;
 import co.com.sofka.cargame.domain.carril.values.CarrilId;
 import co.com.sofka.cargame.domain.carro.events.CarroCreado;
 import co.com.sofka.cargame.domain.carro.events.ConductorAsignado;
 import co.com.sofka.cargame.domain.carro.events.KilometrajeCambiado;
 import co.com.sofka.cargame.domain.carro.values.CarroId;
 import co.com.sofka.cargame.domain.carro.values.Cedula;
-import co.com.sofka.cargame.domain.Color;
 import co.com.sofka.cargame.domain.juego.values.JuegoId;
 import co.com.sofka.domain.generic.AggregateEvent;
 import co.com.sofka.domain.generic.DomainEvent;

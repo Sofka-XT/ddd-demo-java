@@ -31,7 +31,7 @@ public class JuegoEventChange extends EventChange {
                 Jugador jugadorGanador = juego.jugadores.get(event.getJugadorId());
                 juego.podio = juego.podio.asignarPrimerLugar(jugadorGanador);
             } else {
-                throw new IllegalArgumentException("No puede asignar al podio");
+                throw new IllegalArgumentException("No puede asignar al podio no esta en marcha el juego");
             }
         });
         apply((SegundoLugarAsignado event) -> {
@@ -39,7 +39,7 @@ public class JuegoEventChange extends EventChange {
                 Jugador jugadorGanador = juego.jugadores.get(event.getJugadorId());
                 juego.podio = juego.podio.asignarSegundoLugar(jugadorGanador);
             } else {
-                throw new IllegalArgumentException("No puede asignar al podio");
+                throw new IllegalArgumentException("No puede asignar al podio no esta en marcha el juego");
             }
         });
         apply((TercerLugarAsignado event) -> {
@@ -47,7 +47,7 @@ public class JuegoEventChange extends EventChange {
                 Jugador jugadorGanador = juego.jugadores.get(event.getJugadorId());
                 juego.podio = juego.podio.asignarTercerLugar(jugadorGanador);
             } else {
-                throw new IllegalArgumentException("No puede asignar al podio");
+                throw new IllegalArgumentException("No puede asignar al podio no esta en marcha el juego");
             }
         });
 

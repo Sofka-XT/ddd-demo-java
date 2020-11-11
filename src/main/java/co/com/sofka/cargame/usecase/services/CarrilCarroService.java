@@ -6,5 +6,5 @@ import co.com.sofka.cargame.usecase.model.CarroSobreCarril;
 import java.util.List;
 
 public interface CarrilCarroService {
-        List<CarroSobreCarril> getCarrosSobreCarriles(JuegoId juegoId);
+    List<CarroSobreCarril> getCarrosSobreCarriles(JuegoId juegoId);
 }

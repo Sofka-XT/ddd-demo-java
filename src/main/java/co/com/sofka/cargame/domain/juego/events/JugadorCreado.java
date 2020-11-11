@@ -12,10 +12,6 @@ public class JugadorCreado extends DomainEvent implements Incremental {
     private final JugadorId jugadorId;
 
 
-    public Color getColor() {
-        return color;
-    }
-
     public JugadorCreado(JugadorId jugadorId, Nombre nombre, Color color) {
         super("juego.JugadorCreado");
         this.nombre = nombre;
@@ -23,6 +19,9 @@ public class JugadorCreado extends DomainEvent implements Incremental {
         this.color = color;
     }
 
+    public Color getColor() {
+        return color;
+    }
 
     public JugadorId getJugadorId() {
         return jugadorId;

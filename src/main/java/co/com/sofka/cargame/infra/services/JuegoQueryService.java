@@ -1,10 +1,8 @@
 package co.com.sofka.cargame.infra.services;
 
-import co.com.sofka.cargame.domain.juego.events.JuegoCreado;
 import co.com.sofka.cargame.domain.juego.values.JuegoId;
 import co.com.sofka.cargame.domain.juego.values.Pista;
 import co.com.sofka.cargame.usecase.services.JuegoService;
-import co.com.sofka.domain.generic.DomainEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
@@ -26,12 +24,12 @@ public class JuegoQueryService implements JuegoService {
     @Override
     public Integer getKilometros(JuegoId juegoId) {
         var query = new Query(where("aggregateRootId").is(juegoId.value()));
-        return  Objects.requireNonNull(mongoTemplate.findOne(query, JuegoRecord.class, "juego.JuegoCreado"))
+        return Objects.requireNonNull(mongoTemplate.findOne(query, JuegoRecord.class, "juego.JuegoCreado"))
                 .getPista().value().kilometros();
     }
 
-    public static class JuegoRecord  {
-        private  Pista pista;
+    public static class JuegoRecord {
+        private Pista pista;
 
         public Pista getPista() {
             return pista;

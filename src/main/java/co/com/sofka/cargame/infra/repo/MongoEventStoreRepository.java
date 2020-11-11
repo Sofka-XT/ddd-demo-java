@@ -8,10 +8,8 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,7 +21,7 @@ public class MongoEventStoreRepository implements EventStoreRepository {
     }
 
     @Override
-    public List<DomainEvent> getEventsBy(String  aggregateName, String aggregateRootId) {
+    public List<DomainEvent> getEventsBy(String aggregateName, String aggregateRootId) {
         var query = new Query(Criteria.where("aggregateRootId").is(aggregateRootId));
         var find = mongoTemplate.find(query, DocumentEventStored.class, aggregateName);
         return find.stream()
@@ -38,6 +36,6 @@ public class MongoEventStoreRepository implements EventStoreRepository {
         var eventStored = new DocumentEventStored();
         eventStored.setAggregateRootId(aggregateRootId);
         eventStored.setStoredEvent(storedEvent);
-        mongoTemplate.save(eventStored,aggregateName);
+        mongoTemplate.save(eventStored, aggregateName);
     }
 }

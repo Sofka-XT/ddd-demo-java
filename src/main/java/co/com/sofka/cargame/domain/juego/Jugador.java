@@ -22,10 +22,12 @@ public class Jugador extends Entity<JugadorId> {
         return nombre;
     }
 
-    public Color color(){ return color;}
+    public Color color() {
+        return color;
+    }
 
-    public void asignarPuntos(Integer puntos){
-        this.puntos  =+ puntos;
+    public void asignarPuntos(Integer puntos) {
+        this.puntos = +puntos;
     }
 
 

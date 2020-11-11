@@ -1,31 +1,32 @@
 package co.com.sofka.cargame.usecase.model;
 
-public  class CarroSobreCarril {
-        private String carroId;
-        private String carrilId;
+public class CarroSobreCarril {
+    private String carroId;
+    private String carrilId;
 
-        public String getCarroId() {
-            return carroId;
-        }
+    public CarroSobreCarril() {
+    }
 
-        public void setCarroId(String carroId) {
-            this.carroId = carroId;
-        }
+    public CarroSobreCarril(String carroId, String carrilId) {
+        this.carroId = carroId;
+        this.carrilId = carrilId;
+    }
 
+    public String getCarroId() {
+        return carroId;
+    }
 
-        public CarroSobreCarril(){}
-        public CarroSobreCarril(String carroId, String carrilId) {
-            this.carroId = carroId;
-            this.carrilId = carrilId;
-        }
+    public void setCarroId(String carroId) {
+        this.carroId = carroId;
+    }
 
-        public String getCarrilId() {
-            return carrilId;
-        }
+    public String getCarrilId() {
+        return carrilId;
+    }
 
-        public void setCarrilId(String carrilId) {
-            this.carrilId = carrilId;
-        }
+    public void setCarrilId(String carrilId) {
+        this.carrilId = carrilId;
+    }
 
     @Override
     public String toString() {

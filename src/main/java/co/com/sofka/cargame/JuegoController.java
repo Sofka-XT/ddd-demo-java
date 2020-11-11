@@ -27,7 +27,7 @@ public class JuegoController {
     private EventStoreRepository eventStoreRepository;
 
     @PostMapping("/crearJuego")
-    public void crearJuego(@RequestBody CrearJuegoCommand command){
+    public void crearJuego(@RequestBody CrearJuegoCommand command) {
         var useCase = new CrearJuegoUseCase();
         useCase.addRepository(domainEventRepository());
         UseCaseHandler.getInstance()
@@ -37,7 +37,7 @@ public class JuegoController {
     }
 
     @PostMapping("/iniciarJuego")
-    public void iniciarJuego(@RequestBody InicarJuegoCommand command){
+    public void iniciarJuego(@RequestBody InicarJuegoCommand command) {
         var useCase = new InicarJuegoUseCase();
         useCase.addRepository(domainEventRepository());
         UseCaseHandler.getInstance()
@@ -47,7 +47,7 @@ public class JuegoController {
     }
 
 
-    private DomainEventRepository domainEventRepository(){
+    private DomainEventRepository domainEventRepository() {
         return new DomainEventRepository() {
             @Override
             public List<DomainEvent> getEventsBy(String aggregateId) {
@@ -56,7 +56,7 @@ public class JuegoController {
             }
 
             @Override
-            public List<DomainEvent> getEventsBy(String  aggregateName, String aggregateRootId) {
+            public List<DomainEvent> getEventsBy(String aggregateName, String aggregateRootId) {
                 return eventStoreRepository.getEventsBy(aggregateName, aggregateRootId);
             }
         };

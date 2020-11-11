@@ -11,10 +11,10 @@ public class Pista implements ValueObject<Pista.Values> {
     public Pista(Integer kilometros, Integer numeroDeCarriles) {
         this.kilometros = Objects.requireNonNull(kilometros, "Kilomentros requeridos");
         this.numeroDeCarriles = Objects.requireNonNull(numeroDeCarriles, "Numero de carriles necesarios");
-        if(this.kilometros <= 0) {
+        if (this.kilometros <= 0) {
             throw new IllegalArgumentException("No se puede agregar un kilometraje 0 o negativo");
         }
-        if(this.numeroDeCarriles <= 0) {
+        if (this.numeroDeCarriles <= 0) {
             throw new IllegalArgumentException("No se puede agregar un numero de carriles 0 o negativo");
         }
     }

@@ -1,5 +1,6 @@
 package co.com.sofka.cargame.usecase;
 
+import co.com.sofka.business.generic.BusinessException;
 import co.com.sofka.business.generic.UseCase;
 import co.com.sofka.business.support.RequestCommand;
 import co.com.sofka.business.support.ResponseEvents;
@@ -11,7 +12,11 @@ public class InicarJuegoUseCase extends UseCase<RequestCommand<InicarJuegoComman
     public void executeUseCase(RequestCommand<InicarJuegoCommand> requestCommand) {
         var command = requestCommand.getCommand();
         var juego = Juego.from(command.getJuegoId(), retrieveEvents());
-        juego.iniciarJuego();
-        emit().onSuccess(new ResponseEvents(juego.getUncommittedChanges()));
+        if (juego.jugando().equals(Boolean.FALSE)) {
+            juego.iniciarJuego();
+            emit().onSuccess(new ResponseEvents(juego.getUncommittedChanges()));
+        } else {
+            emit().onError(new BusinessException(juego.identity().value(), "Ya termino el Juego"));
+        }
     }
 }

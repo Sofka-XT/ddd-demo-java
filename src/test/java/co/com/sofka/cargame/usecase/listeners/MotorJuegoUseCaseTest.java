@@ -31,12 +31,10 @@ import org.mockito.stubbing.Answer;
 
 import java.util.List;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
-class MotorJuegoUseCaseTest  extends UseCaseHandleBaseTest {
+class MotorJuegoUseCaseTest extends UseCaseHandleBaseTest {
     private static final String JUEGO_ID = "fff-aaa-gggg";
 
     @Mock
@@ -46,7 +44,7 @@ class MotorJuegoUseCaseTest  extends UseCaseHandleBaseTest {
     private MoverCarroUseCase moverCarroUseCase;
 
     @BeforeEach
-    public void setup(){
+    public void setup() {
         var repository = mock(DomainEventRepository.class);
         when(repository.getEventsBy(eq("1"))).thenReturn(List.of(
                 new CarroCreado(CarroId.of("1"), JuegoId.of(JUEGO_ID), new Color("RED")),
@@ -57,8 +55,7 @@ class MotorJuegoUseCaseTest  extends UseCaseHandleBaseTest {
     }
 
     @Test
-    void correrJuego(){
-        //preparacion
+    void correrJuego() {
         var juegoIniciado = new JuegoIniciado();
         juegoIniciado.setAggregateRootId(JUEGO_ID);
 
@@ -69,9 +66,10 @@ class MotorJuegoUseCaseTest  extends UseCaseHandleBaseTest {
 
         when(repository.getEventsBy(anyString())).thenAnswer(new Answer<List<DomainEvent>>() {
             int counter = 0;
+
             @Override
-            public List<DomainEvent> answer(InvocationOnMock invocationOnMock)  {
-                if(counter++ == 2){
+            public List<DomainEvent> answer(InvocationOnMock invocationOnMock) {
+                if (counter++ == 2) {
                     return List.of(
                             new JuegoCreado(new Pista(3, 2)),
                             new JuegoIniciado(),
@@ -89,21 +87,19 @@ class MotorJuegoUseCaseTest  extends UseCaseHandleBaseTest {
         motorJuegoUseCase.addRepository(repository);
         motorJuegoUseCase.addServiceBuilder(
                 new ServiceBuilder()
-                .addService(carrilCarroService)
+                        .addService(carrilCarroService)
         );
 
-        //accion
         UseCaseHandler.getInstance()
                 .setIdentifyExecutor(JUEGO_ID)
                 .asyncExecutor(motorJuegoUseCase, new TriggeredEvent<>(juegoIniciado))
                 .subscribe(subscriber);
 
-        //verificacion
         verify(subscriber, times(3)).onNext(eventCaptor.capture());
         verify(carrilCarroService).getCarrosSobreCarriles(any());
         Assertions.assertTrue(eventCaptor.getAllValues()
                 .stream()
-                .map(v-> (KilometrajeCambiado)v)
+                .map(v -> (KilometrajeCambiado) v)
                 .map(KilometrajeCambiado::getDistancia)
                 .reduce(Integer::sum).orElseThrow() > 100
         );

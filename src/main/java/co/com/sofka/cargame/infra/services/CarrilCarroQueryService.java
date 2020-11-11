@@ -32,16 +32,16 @@ public class CarrilCarroQueryService implements CarrilCarroService {
                 .foreignField("aggregateRootId")
                 .as("carroAgregadoACarrail");
 
-        var aggregation  = Aggregation.newAggregation(
+        var aggregation = Aggregation.newAggregation(
                 lookup,
                 Aggregation.match(where("juegoId.uuid").is(juegoId.value()))
         );
 
-        return  mongoTemplate.aggregate(aggregation, "carril.CarrilCreado", String.class)
+        return mongoTemplate.aggregate(aggregation, "carril.CarrilCreado", String.class)
                 .getMappedResults().stream()
                 .map(body -> new Gson().fromJson(body, CarroSobreCarrilRecord.class))
                 .map(carroSobreCarrilRecord -> {
-                    var carroCarril =  new CarroSobreCarril();
+                    var carroCarril = new CarroSobreCarril();
                     carroCarril.setCarrilId(carroSobreCarrilRecord.aggregateRootId);
                     carroCarril.setCarroId(carroSobreCarrilRecord.getCarroAgregadoACarrail().get(0).getCarroId().getUuid());
                     return carroCarril;

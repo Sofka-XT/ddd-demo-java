@@ -4,9 +4,10 @@ import co.com.sofka.domain.generic.Identity;
 
 
 public class Cedula extends Identity {
-    public Cedula(){
+    public Cedula() {
 
     }
+
     private Cedula(String value) {
         super(value);
     }

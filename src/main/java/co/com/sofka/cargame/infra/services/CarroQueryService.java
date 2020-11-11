@@ -1,9 +1,6 @@
 package co.com.sofka.cargame.infra.services;
 
 import co.com.sofka.cargame.domain.carro.values.CarroId;
-import co.com.sofka.cargame.domain.carro.values.Cedula;
-import co.com.sofka.cargame.domain.juego.values.Pista;
-import co.com.sofka.cargame.usecase.model.CarroSobreCarril;
 import co.com.sofka.cargame.usecase.services.CarroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -26,13 +23,13 @@ public class CarroQueryService implements CarroService {
     @Override
     public String getConductorIdPor(CarroId carroId) {
         var query = new Query(where("aggregateRootId").is(carroId.value()));
-        return  Objects.requireNonNull(mongoTemplate.findOne(query, CarroRecord.class, "carro.ConductorAsignado"))
+        return Objects.requireNonNull(mongoTemplate.findOne(query, CarroRecord.class, "carro.ConductorAsignado"))
                 .getCedula().getUuid();
     }
 
-    public static class CarroRecord  {
-        private  String nombre;
-        private  Cedula cedula;
+    public static class CarroRecord {
+        private String nombre;
+        private Cedula cedula;
 
         public String getNombre() {
             return nombre;
@@ -50,6 +47,7 @@ public class CarroQueryService implements CarroService {
             this.cedula = cedula;
         }
     }
+
     public static class Cedula {
         private String uuid;
 

@@ -7,7 +7,8 @@ public class CarrilId extends Identity {
         super(carrilId);
     }
 
-    public CarrilId() { }
+    public CarrilId() {
+    }
 
     public static CarrilId of(String carrilId) {
         return new CarrilId(carrilId);

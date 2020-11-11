@@ -31,6 +31,7 @@ public class CrearJuegoUseCase extends UseCase<RequestCommand<CrearJuegoCommand>
                 5, "#0000FF",
                 6, "#FFFF00",
                 7, "#00FFFF",
+                8, "#00FFFF",
                 9, "#FF00FF",
                 10, "#C2C2C2"
         );
@@ -57,14 +58,14 @@ public class CrearJuegoUseCase extends UseCase<RequestCommand<CrearJuegoCommand>
         boolean generado = false;
         int aleatorio = 0;
         while (!generado) {
-            int posible = 1 + random.nextInt(8);
+            int posible = 1 + random.nextInt(9);
             if (!generados.contains(posible)) {
                 generados.add(posible);
                 aleatorio = posible;
                 generado = true;
             }
         }
-        if(aleatorio == 0) {
+        if (aleatorio == 0) {
             generados.clear();
             return generarColorAleatorio();
         }

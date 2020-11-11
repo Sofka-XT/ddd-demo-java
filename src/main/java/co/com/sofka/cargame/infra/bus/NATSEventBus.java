@@ -41,14 +41,12 @@ public class NATSEventBus implements EventBus {
         var notificationSerialization = SuccessNotificationSerializer.instance().serialize(notification);
         nc.publish(event.type + "." + event.aggregateRootId(), notificationSerialization.getBytes());
         mongoTemplate.save(event, event.type);
-        var log = String.format("###### Event published to %s.%s", event.type, event.aggregateRootId());
-        logger.info(log);
     }
 
     @Override
     public void publishError(ErrorEvent errorEvent) {
 
-        if(errorEvent.error instanceof BusinessException)
+        if (errorEvent.error instanceof BusinessException)
             publishToTopic(TOPIC_BUSINESS_ERROR, errorEvent);
         else
             publishToTopic(TOPIC_ERROR, errorEvent);
@@ -57,7 +55,7 @@ public class NATSEventBus implements EventBus {
 
     }
 
-    public void publishToTopic(String topic, ErrorEvent errorEvent){
+    public void publishToTopic(String topic, ErrorEvent errorEvent) {
         var notification = ErrorNotification.wrapEvent(ORIGIN, errorEvent);
         var notificationSerialization = ErrorNotificationSerializer.instance().serialize(notification);
         nc.publish(topic + "." + errorEvent.identify, notificationSerialization.getBytes());

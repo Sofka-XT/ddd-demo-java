@@ -8,14 +8,14 @@ public class CarrilCreado extends DomainEvent {
     private final Integer metros;
     private final JuegoId juegoId;
 
-    public JuegoId getJuegoId() {
-        return juegoId;
-    }
-
     public CarrilCreado(Integer metros, JuegoId juegoId) {
         super("carril.CarrilCreado");
         this.metros = metros;
         this.juegoId = juegoId;
+    }
+
+    public JuegoId getJuegoId() {
+        return juegoId;
     }
 
     public Integer getMetros() {

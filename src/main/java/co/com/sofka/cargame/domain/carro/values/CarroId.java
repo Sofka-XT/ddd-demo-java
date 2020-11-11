@@ -4,7 +4,8 @@ import co.com.sofka.domain.generic.Identity;
 
 public class CarroId extends Identity {
 
-    public CarroId(){}
+    public CarroId() {
+    }
 
     private CarroId(String value) {
         super(value);

@@ -8,7 +8,8 @@ public class MoverCarroCommand implements Command {
     private CarroId carroId;
     private CarrilId carrilId;
 
-    public MoverCarroCommand(){}
+    public MoverCarroCommand() {
+    }
 
     public MoverCarroCommand(CarroId carroId, CarrilId carrilId) {
         this.carroId = carroId;

@@ -7,7 +7,6 @@ import co.com.sofka.business.support.ResponseEvents;
 import co.com.sofka.business.support.TriggeredEvent;
 import co.com.sofka.domain.generic.DomainEvent;
 import co.com.sofka.infraestructure.asyn.SubscriberEvent;
-import co.com.sofka.infraestructure.event.EventSerializer;
 import co.com.sofka.infraestructure.repository.EventStoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,7 +24,7 @@ public class EventListenerSubscriber implements Flow.Subscriber<DomainEvent> {
     private final Set<UseCase.UseCaseWrap> useCases;
     private final EventStoreRepository repository;
     private final SubscriberEvent subscriberEvent;
-    private Flow.Subscription subscription;
+
 
     @Autowired
     public EventListenerSubscriber(Set<UseCase.UseCaseWrap> useCases, EventStoreRepository repository, SubscriberEvent subscriberEvent) {
@@ -36,14 +35,11 @@ public class EventListenerSubscriber implements Flow.Subscriber<DomainEvent> {
 
     @Override
     public void onSubscribe(Flow.Subscription subscription) {
-        this.subscription = subscription;
-        subscription.request(100);
     }
 
     @Override
     public void onNext(DomainEvent domainEvent) {
         DomainEvent event = Objects.requireNonNull(domainEvent);
-        logger.log(Level.INFO, "###### Process event {0}", EventSerializer.instance().serialize(event));
         this.useCases.stream().filter((useCaseWrap) -> useCaseWrap.eventType().equals(domainEvent.type)).forEach((useCaseWrap) -> {
             UseCase<TriggeredEvent<? extends DomainEvent>, ResponseEvents> useCase = useCaseWrap.usecase();
             useCase.addRepository(new DomainEventRepository() {
@@ -55,17 +51,15 @@ public class EventListenerSubscriber implements Flow.Subscriber<DomainEvent> {
                     return EventListenerSubscriber.this.repository.getEventsBy(aggregate, aggregateRootId);
                 }
             });
-            logger.info("###### Use case handler to event --> " + event.type);
             UseCaseHandler.getInstance()
                     .asyncExecutor(useCase, new TriggeredEvent<>(event))
                     .subscribe(this.subscriberEvent);
         });
-        subscription.request(1);
     }
 
     @Override
     public void onError(Throwable throwable) {
-        logger.log(Level.SEVERE, throwable.getMessage());
+        logger.log(Level.SEVERE, throwable.getMessage(), throwable);
     }
 
     @Override

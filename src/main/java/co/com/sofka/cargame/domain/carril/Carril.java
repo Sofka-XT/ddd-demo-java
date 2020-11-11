@@ -63,6 +63,7 @@ public class Carril extends AggregateEvent<CarrilId> {
     public Boolean desplazamientoFinal() {
         return desplazamientoFinal;
     }
+
     public String carroId() {
         return carroId.value();
     }

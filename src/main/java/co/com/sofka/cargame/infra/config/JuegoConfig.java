@@ -5,12 +5,6 @@ import co.com.sofka.business.generic.UseCase;
 import co.com.sofka.business.repository.DomainEventRepository;
 import co.com.sofka.business.support.ResponseEvents;
 import co.com.sofka.business.support.TriggeredEvent;
-import co.com.sofka.cargame.domain.carril.events.CarroFinalizoSuRecorrido;
-import co.com.sofka.cargame.domain.carro.events.CarroCreado;
-import co.com.sofka.cargame.domain.carro.events.KilometrajeCambiado;
-import co.com.sofka.cargame.domain.juego.events.JuegoCreado;
-import co.com.sofka.cargame.domain.juego.events.JuegoIniciado;
-import co.com.sofka.cargame.domain.juego.events.JugadorCreado;
 import co.com.sofka.cargame.infra.bus.EventListenerSubscriber;
 import co.com.sofka.cargame.infra.bus.EventSubscriber;
 import co.com.sofka.cargame.infra.bus.NATSEventSubscriber;
@@ -19,7 +13,6 @@ import co.com.sofka.cargame.infra.services.CarroQueryService;
 import co.com.sofka.cargame.infra.services.JuegoQueryService;
 import co.com.sofka.cargame.usecase.MoverCarroUseCase;
 import co.com.sofka.cargame.usecase.listeners.*;
-import co.com.sofka.cargame.usecase.services.CarrilCarroService;
 import co.com.sofka.domain.generic.DomainEvent;
 import co.com.sofka.infraestructure.asyn.SubscriberEvent;
 import co.com.sofka.infraestructure.bus.EventBus;
@@ -36,12 +29,12 @@ import java.util.Set;
 public class JuegoConfig {
 
     @Bean
-    public SubscriberEvent subscriberEvent(EventStoreRepository eventStoreRepository, EventBus eventBus){
+    public SubscriberEvent subscriberEvent(EventStoreRepository eventStoreRepository, EventBus eventBus) {
         return new SubscriberEvent(eventStoreRepository, eventBus);
     }
 
     @Bean
-    public EventSubscriber eventSubscriber(@Value("${spring.nats.uri}") String uri, EventListenerSubscriber eventListenerSubscriber) throws  IOException, InterruptedException {
+    public EventSubscriber eventSubscriber(@Value("${spring.nats.uri}") String uri, EventListenerSubscriber eventListenerSubscriber) throws IOException, InterruptedException {
         var eventSubs = new NATSEventSubscriber(uri, eventListenerSubscriber);
         eventSubs.subscribe("juego.>", "handles.juego");
         eventSubs.subscribe("carro.>", "handles.carro");
@@ -50,9 +43,9 @@ public class JuegoConfig {
     }
 
     @Bean
-    public  ServiceBuilder serviceBuilder(
+    public ServiceBuilder serviceBuilder(
             CarrilCarroQueryService carrilCarroService, CarroQueryService carroQueryService, JuegoQueryService juegoQueryService
-    ){
+    ) {
         ServiceBuilder serviceBuilder = new ServiceBuilder();
         serviceBuilder.addService(carrilCarroService);
         serviceBuilder.addService(carroQueryService);
@@ -61,17 +54,17 @@ public class JuegoConfig {
     }
 
     @Bean
-    public Set<UseCase.UseCaseWrap> useCases(SubscriberEvent subscriberEvent, EventStoreRepository eventStoreRepository, ServiceBuilder serviceBuilder){
+    public Set<UseCase.UseCaseWrap> useCases(SubscriberEvent subscriberEvent, EventStoreRepository eventStoreRepository, ServiceBuilder serviceBuilder) {
 
 
         var moverCarro = new MoverCarroUseCase();
 
-        UseCase<TriggeredEvent<? extends DomainEvent>, ResponseEvents> asinarAPodioUseCase = (UseCase)new AsinarAPodioUseCase();
-        UseCase<TriggeredEvent<? extends DomainEvent>, ResponseEvents> crearCarrilUseCase = (UseCase)new CrearCarrilUseCase();
-        UseCase<TriggeredEvent<? extends DomainEvent>, ResponseEvents> crearCarroUseCase = (UseCase)new CrearCarroUseCase();
-        UseCase<TriggeredEvent<? extends DomainEvent>, ResponseEvents> moverCarroEnCarrilUseCase = (UseCase)new MoverCarroEnCarrilUseCase();
-        UseCase<TriggeredEvent<? extends DomainEvent>, ResponseEvents> motorJuegoUseCase = (UseCase)new MotorJuegoUseCase(moverCarro, subscriberEvent);
-        UseCase<TriggeredEvent<? extends DomainEvent>, ResponseEvents> notificarGanador = (UseCase)new NotificarGanadoresUseCase();
+        UseCase<TriggeredEvent<? extends DomainEvent>, ResponseEvents> asinarAPodioUseCase = (UseCase) new AsinarAPodioUseCase();
+        UseCase<TriggeredEvent<? extends DomainEvent>, ResponseEvents> crearCarrilUseCase = (UseCase) new CrearCarrilUseCase();
+        UseCase<TriggeredEvent<? extends DomainEvent>, ResponseEvents> crearCarroUseCase = (UseCase) new CrearCarroUseCase();
+        UseCase<TriggeredEvent<? extends DomainEvent>, ResponseEvents> moverCarroEnCarrilUseCase = (UseCase) new MoverCarroEnCarrilUseCase();
+        UseCase<TriggeredEvent<? extends DomainEvent>, ResponseEvents> motorJuegoUseCase = (UseCase) new MotorJuegoUseCase(moverCarro, subscriberEvent);
+        UseCase<TriggeredEvent<? extends DomainEvent>, ResponseEvents> notificarGanador = (UseCase) new NotificarGanadoresUseCase();
 
         moverCarro.addServiceBuilder(serviceBuilder);
         notificarGanador.addServiceBuilder(serviceBuilder);
@@ -94,7 +87,7 @@ public class JuegoConfig {
         );
     }
 
-    private DomainEventRepository domainEventRepository(EventStoreRepository eventStoreRepository){
+    private DomainEventRepository domainEventRepository(EventStoreRepository eventStoreRepository) {
         return new DomainEventRepository() {
             @Override
             public List<DomainEvent> getEventsBy(String aggregateId) {
