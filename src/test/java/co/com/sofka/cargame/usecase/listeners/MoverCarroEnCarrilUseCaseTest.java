@@ -22,7 +22,7 @@ import static org.mockito.Mockito.*;
 class MoverCarroEnCarrilUseCaseTest extends UseCaseHandleBaseTest {
 
     @Test
-    void moverCarroEnCarril_casoFeliz() {
+    void moverCarroEnCarril_casoFeliz() throws InterruptedException {
         var usecase = new MoverCarroEnCarrilUseCase();
         var event = new KilometrajeCambiado(20, CarrilId.of("xxxx-xxxx"));
 
@@ -37,7 +37,7 @@ class MoverCarroEnCarrilUseCaseTest extends UseCaseHandleBaseTest {
                 .setIdentifyExecutor("xxxx-xxxx")
                 .asyncExecutor(usecase, new TriggeredEvent<>(event))
                 .subscribe(subscriber);
-
+        Thread.sleep(600);
         verify(subscriber).onNext(eventCaptor.capture());
         Assertions.assertTrue(eventCaptor.getValue() instanceof CarroDesplazado);
     }

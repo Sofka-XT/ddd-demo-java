@@ -3,6 +3,8 @@ package co.com.sofka.cargame.domain.juego.values;
 import co.com.sofka.cargame.domain.juego.Jugador;
 import co.com.sofka.domain.generic.ValueObject;
 
+import java.util.Objects;
+
 public class Podio implements ValueObject<Podio.Props> {
     private final Jugador primerLugar;
     private final Jugador segundoLugar;
@@ -19,6 +21,8 @@ public class Podio implements ValueObject<Podio.Props> {
         segundoLugar = null;
         tercerLugar = null;
     }
+
+
 
     public Podio asignarPrimerLugar(Jugador jugador) {
         return new Podio(jugador, segundoLugar, tercerLugar);
@@ -49,6 +53,11 @@ public class Podio implements ValueObject<Podio.Props> {
             public Jugador tercerLugar() {
                 return tercerLugar;
             }
+
+            @Override
+            public Boolean estaLLeno(){
+                return Objects.nonNull(primerLugar) && Objects.nonNull(segundoLugar) && Objects.nonNull(tercerLugar);
+            }
         };
     }
 
@@ -58,5 +67,7 @@ public class Podio implements ValueObject<Podio.Props> {
         Jugador segundoLugar();
 
         Jugador tercerLugar();
+
+        Boolean estaLLeno();
     }
 }

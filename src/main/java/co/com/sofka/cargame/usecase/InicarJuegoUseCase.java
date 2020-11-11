@@ -12,7 +12,7 @@ public class InicarJuegoUseCase extends UseCase<RequestCommand<InicarJuegoComman
     public void executeUseCase(RequestCommand<InicarJuegoCommand> requestCommand) {
         var command = requestCommand.getCommand();
         var juego = Juego.from(command.getJuegoId(), retrieveEvents());
-        if (juego.jugando().equals(Boolean.FALSE)) {
+        if (juego.jugando().equals(Boolean.FALSE) && juego.podio().estaLLeno().equals(Boolean.FALSE)) {
             juego.iniciarJuego();
             emit().onSuccess(new ResponseEvents(juego.getUncommittedChanges()));
         } else {

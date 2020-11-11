@@ -34,9 +34,9 @@ class CrearCarrilUseCaseTest extends UseCaseHandleBaseTest {
                 .setIdentifyExecutor("fff-aas-fff")
                 .asyncExecutor(useCase, new TriggeredEvent<>(event))
                 .subscribe(subscriber);
+        Thread.sleep(600);
 
         verify(subscriber, times(2)).onNext(eventCaptor.capture());
-        Thread.sleep(500);
         verify(juegoService).getKilometros(any());
         var carrilCreado = (CarrilCreado) eventCaptor.getAllValues().get(0);
         var carroAgregadoACarrail = (CarroAgregadoACarrail) eventCaptor.getAllValues().get(1);

@@ -5,6 +5,7 @@ import co.com.sofka.cargame.domain.juego.values.Podio;
 import co.com.sofka.domain.generic.EventChange;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 
 public class JuegoEventChange extends EventChange {

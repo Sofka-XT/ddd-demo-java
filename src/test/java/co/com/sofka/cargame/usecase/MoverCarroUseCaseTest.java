@@ -37,8 +37,8 @@ class MoverCarroUseCaseTest extends UseCaseHandleBaseTest {
                 .asyncExecutor(useCase, new RequestCommand<>(command))
                 .subscribe(subscriber);
 
-        verify(subscriber).onNext(eventCaptor.capture());
         Thread.sleep(800);
+        verify(subscriber).onNext(eventCaptor.capture());
 
         var kilometrajeCambiado = (KilometrajeCambiado) eventCaptor.getValue();
         Assertions.assertEquals("xxxxxx", kilometrajeCambiado.getCarrilId().value());
