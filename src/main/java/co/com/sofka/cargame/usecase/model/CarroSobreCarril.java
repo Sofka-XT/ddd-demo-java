@@ -30,7 +30,7 @@ public class CarroSobreCarril {
 
     @Override
     public String toString() {
-        return "CarroSobreCarril{" +
+        return "CarroSobreCarril {" +
                 "carroId='" + carroId + '\'' +
                 ", carrilId='" + carrilId + '\'' +
                 '}';

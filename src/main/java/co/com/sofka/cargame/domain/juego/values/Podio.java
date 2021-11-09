@@ -23,7 +23,6 @@ public class Podio implements ValueObject<Podio.Props> {
     }
 
 
-
     public Podio asignarPrimerLugar(Jugador jugador) {
         return new Podio(jugador, segundoLugar, tercerLugar);
     }
@@ -55,7 +54,7 @@ public class Podio implements ValueObject<Podio.Props> {
             }
 
             @Override
-            public Boolean estaLLeno(){
+            public Boolean estaLLeno() {
                 return Objects.nonNull(primerLugar) && Objects.nonNull(segundoLugar) && Objects.nonNull(tercerLugar);
             }
         };

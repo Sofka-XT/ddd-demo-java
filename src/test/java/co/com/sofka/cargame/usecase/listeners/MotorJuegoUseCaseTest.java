@@ -83,7 +83,7 @@ class MotorJuegoUseCaseTest extends UseCaseHandleBaseTest {
             }
         });
 
-        var motorJuegoUseCase = new MotorJuegoUseCase(moverCarroUseCase, subscriber);
+        var motorJuegoUseCase = new MotorJuegoUseCase();
         motorJuegoUseCase.addRepository(repository);
         motorJuegoUseCase.addServiceBuilder(
                 new ServiceBuilder()

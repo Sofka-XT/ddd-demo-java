@@ -24,7 +24,7 @@ class MoverCarroEnCarrilUseCaseTest extends UseCaseHandleBaseTest {
     @Test
     void moverCarroEnCarril_casoFeliz() throws InterruptedException {
         var usecase = new MoverCarroEnCarrilUseCase();
-        var event = new KilometrajeCambiado(20, CarrilId.of("xxxx-xxxx"));
+        var event = new KilometrajeCambiado(20, CarrilId.of("xxxx-xxxx"), JuegoId.of("xxxsf"));
 
         when(repository.getEventsBy("carril", "xxxx-xxxx")).thenReturn(List.of(
                 new CarrilCreado(500, JuegoId.of("xxx-xxx")),
@@ -46,7 +46,7 @@ class MoverCarroEnCarrilUseCaseTest extends UseCaseHandleBaseTest {
     @Test
     public void alcazarLaMeta_casoFeliz() throws InterruptedException {
         var usecase = new MoverCarroEnCarrilUseCase();
-        var event = new KilometrajeCambiado(101, CarrilId.of("xxxx-xxxx"));
+        var event = new KilometrajeCambiado(101, CarrilId.of("xxxx-xxxx"),  JuegoId.of("xxxsf"));
 
         when(repository.getEventsBy("carril", "xxxx-xxxx")).thenReturn(List.of(
                 new CarrilCreado(500, JuegoId.of("xxx-xxx")),

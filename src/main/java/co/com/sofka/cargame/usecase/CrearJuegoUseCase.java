@@ -10,13 +10,14 @@ import co.com.sofka.cargame.domain.juego.values.JuegoId;
 import co.com.sofka.cargame.domain.juego.values.JugadorId;
 import co.com.sofka.cargame.domain.juego.values.Nombre;
 import co.com.sofka.cargame.domain.juego.values.Pista;
+import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
-
+@Component
 public class CrearJuegoUseCase extends UseCase<RequestCommand<CrearJuegoCommand>, ResponseEvents> {
     private final Set<Integer> generados = new HashSet<>();
     private final Random random = new Random();
@@ -40,7 +41,7 @@ public class CrearJuegoUseCase extends UseCase<RequestCommand<CrearJuegoCommand>
     @Override
     public void executeUseCase(RequestCommand<CrearJuegoCommand> requestCommand) {
         var command = requestCommand.getCommand();
-        var juego = new Juego(new JuegoId(), new Pista(
+        var juego = new Juego(JuegoId.of(command.getJuegoId()), new Pista(
                 command.getKilometros(), command.getJugadores().size()
         ));
 
@@ -51,7 +52,7 @@ public class CrearJuegoUseCase extends UseCase<RequestCommand<CrearJuegoCommand>
                         new Color(generarColorAleatorio())
                 )
         );
-        emit().onSuccess(new ResponseEvents(juego.getUncommittedChanges()));
+        emit().onResponse(new ResponseEvents(juego.getUncommittedChanges()));
     }
 
     private String generarColorAleatorio() {

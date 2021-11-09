@@ -13,6 +13,7 @@ public class CarroCreado extends DomainEvent {
 
     public CarroCreado(CarroId carroId, JuegoId juegoId, Color color) {
         super("carro.CarroCreado");
+        setAggregateParentId(juegoId.value());
         this.carroId = carroId;
         this.color = color;
         this.juegoId = juegoId;

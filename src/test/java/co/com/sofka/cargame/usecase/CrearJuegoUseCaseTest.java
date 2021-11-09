@@ -17,7 +17,8 @@ class CrearJuegoUseCaseTest extends UseCaseHandleBaseTest {
     @Test
     void crearJuego_casoFeliz() throws InterruptedException {
         var useCase = new CrearJuegoUseCase();
-        var command = new CrearJuegoCommand(5, Map.of(
+        var juegoId = "xxxx";
+        var command = new CrearJuegoCommand(5, juegoId, Map.of(
                 "111", "Raul Alzate",
                 "222", "Andres",
                 "333", "Ana"

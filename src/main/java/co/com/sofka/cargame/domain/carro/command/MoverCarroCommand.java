@@ -4,7 +4,7 @@ import co.com.sofka.cargame.domain.carril.values.CarrilId;
 import co.com.sofka.cargame.domain.carro.values.CarroId;
 import co.com.sofka.domain.generic.Command;
 
-public class MoverCarroCommand implements Command {
+public class MoverCarroCommand extends Command {
     private CarroId carroId;
     private CarrilId carrilId;
 

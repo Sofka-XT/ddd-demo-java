@@ -10,6 +10,7 @@ public class CarrilCreado extends DomainEvent {
 
     public CarrilCreado(Integer metros, JuegoId juegoId) {
         super("carril.CarrilCreado");
+        setAggregateParentId(juegoId.value());
         this.metros = metros;
         this.juegoId = juegoId;
     }

@@ -1,6 +1,5 @@
 package co.com.sofka.cargame.usecase.listeners;
 
-import co.com.sofka.business.annotation.EventListener;
 import co.com.sofka.business.generic.UseCase;
 import co.com.sofka.business.support.ResponseEvents;
 import co.com.sofka.business.support.TriggeredEvent;
@@ -8,8 +7,9 @@ import co.com.sofka.cargame.domain.carril.Carril;
 import co.com.sofka.cargame.domain.carril.values.CarrilId;
 import co.com.sofka.cargame.domain.carro.events.CarroCreado;
 import co.com.sofka.cargame.usecase.services.JuegoService;
+import org.springframework.stereotype.Component;
 
-@EventListener(eventType = "carro.CarroCreado")
+@Component
 public class CrearCarrilUseCase extends UseCase<TriggeredEvent<CarroCreado>, ResponseEvents> {
     @Override
     public void executeUseCase(TriggeredEvent<CarroCreado> carroCreadoTriggeredEvent) {
@@ -19,7 +19,7 @@ public class CrearCarrilUseCase extends UseCase<TriggeredEvent<CarroCreado>, Res
 
         var carril = new Carril(new CarrilId(), event.getJuegoId(), kilometros * 1000);
         carril.aggregarCarro(event.getPlaca());
-        emit().onSuccess(new ResponseEvents(carril.getUncommittedChanges()));
+        emit().onResponse(new ResponseEvents(carril.getUncommittedChanges()));
     }
 
 

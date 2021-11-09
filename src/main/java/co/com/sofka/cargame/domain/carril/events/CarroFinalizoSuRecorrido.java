@@ -12,6 +12,7 @@ public class CarroFinalizoSuRecorrido extends DomainEvent implements Incremental
 
     public CarroFinalizoSuRecorrido(CarroId carroId, JuegoId juegoId) {
         super("carril.CarroFinalizoSuRecorrido");
+        setAggregateParentId(juegoId.value());
         this.carroId = carroId;
         this.juegoId = juegoId;
     }

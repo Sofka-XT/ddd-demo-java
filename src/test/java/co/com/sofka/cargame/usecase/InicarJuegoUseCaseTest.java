@@ -20,7 +20,7 @@ class InicarJuegoUseCaseTest extends UseCaseHandleBaseTest {
     @Test
     void iniciarJuego_casoFeliz() throws InterruptedException {
         var useCase = new InicarJuegoUseCase();
-        var command = new InicarJuegoCommand(JuegoId.of("xxxx"));
+        var command = new InicarJuegoCommand("xxxx");
 
         when(repository.getEventsBy("xxxx")).thenReturn(List.of(
                 new JuegoCreado(new Pista(5, 3))
@@ -41,7 +41,7 @@ class InicarJuegoUseCaseTest extends UseCaseHandleBaseTest {
     @Test
     void elJuegoFinalizo() throws InterruptedException {
         var useCase = new InicarJuegoUseCase();
-        var command = new InicarJuegoCommand(JuegoId.of("xxxx"));
+        var command = new InicarJuegoCommand("xxxx");
 
         when(repository.getEventsBy("xxxx")).thenReturn(List.of(
                 new JuegoCreado(new Pista(5, 3)),

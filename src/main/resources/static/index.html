@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Reactive Events!</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<body>
+<nav class="navbar navbar-default navbar-pf" role="navigation">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="/">
+            <p><strong>>> Reactive Events!</strong></p>
+        </a>
+    </div>
+</nav>
+<div class="container">
+    <br/>
+    <div class="row">
+        <input id="aggregateId" class="col-md-4" type="text" placeholder="your correlation id">
+        <button id="connect" class="col-md-1 btn btn-primary" type="button">connect</button>
+
+    </div>
+    <div class="row">
+        <br/>
+        <br/>
+        <code class="col-md-12" id="result"></code>
+    </div>
+</div>
+<script type="text/javascript">
+      var connected = false;
+      var socket;
+      document.getElementById("connect").onclick = function() {
+          if (!connected) {
+              var aggregateId = document.getElementById("aggregateId").value;
+              console.log("Val: " + aggregateId);
+              socket = new WebSocket("ws://" + location.host + "/retrieve/" + aggregateId);
+
+              socket.onmessage = function(m) {
+                  console.log("Got message: " + m.data);
+                  document.getElementById("result").append(m.data + "\n");
+              };
+          }
+      };
+
+    </script>
+</body>
+
+</html>

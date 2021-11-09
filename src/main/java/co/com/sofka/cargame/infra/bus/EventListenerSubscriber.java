@@ -1,5 +1,6 @@
 package co.com.sofka.cargame.infra.bus;
 
+import co.com.sofka.business.generic.ServiceBuilder;
 import co.com.sofka.business.generic.UseCase;
 import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.repository.DomainEventRepository;
@@ -24,12 +25,18 @@ public class EventListenerSubscriber implements Flow.Subscriber<DomainEvent> {
     private final Set<UseCase.UseCaseWrap> useCases;
     private final EventStoreRepository repository;
     private final SubscriberEvent subscriberEvent;
+    private final ServiceBuilder serviceBuilder;
 
 
     @Autowired
-    public EventListenerSubscriber(Set<UseCase.UseCaseWrap> useCases, EventStoreRepository repository, SubscriberEvent subscriberEvent) {
+    public EventListenerSubscriber(
+            Set<UseCase.UseCaseWrap> useCases,
+            EventStoreRepository repository,
+            ServiceBuilder serviceBuilder,
+            SubscriberEvent subscriberEvent) {
         this.useCases = useCases;
         this.repository = repository;
+        this.serviceBuilder = serviceBuilder;
         this.subscriberEvent = subscriberEvent;
     }
 
@@ -42,6 +49,7 @@ public class EventListenerSubscriber implements Flow.Subscriber<DomainEvent> {
         DomainEvent event = Objects.requireNonNull(domainEvent);
         this.useCases.stream().filter((useCaseWrap) -> useCaseWrap.eventType().equals(domainEvent.type)).forEach((useCaseWrap) -> {
             UseCase<TriggeredEvent<? extends DomainEvent>, ResponseEvents> useCase = useCaseWrap.usecase();
+            useCase.addServiceBuilder(serviceBuilder);
             useCase.addRepository(new DomainEventRepository() {
                 public List<DomainEvent> getEventsBy(String aggregateRootId) {
                     return EventListenerSubscriber.this.repository.getEventsBy(event.getAggregateName(), aggregateRootId);
@@ -52,6 +60,7 @@ public class EventListenerSubscriber implements Flow.Subscriber<DomainEvent> {
                 }
             });
             UseCaseHandler.getInstance()
+                    .setIdentifyExecutor(event.aggregateRootId())
                     .asyncExecutor(useCase, new TriggeredEvent<>(event))
                     .subscribe(this.subscriberEvent);
         });

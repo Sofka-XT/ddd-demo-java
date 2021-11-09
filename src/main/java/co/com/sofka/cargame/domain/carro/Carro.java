@@ -44,7 +44,7 @@ public class Carro extends AggregateEvent<CarroId> {
 
     public void avanzarEnCarril(CarrilId carrilId) {
         var avance = conductor.lanzarDado() * 100;
-        appendChange(new KilometrajeCambiado(avance, carrilId)).apply();
+        appendChange(new KilometrajeCambiado(avance, carrilId, juegoId)).apply();
     }
 
 

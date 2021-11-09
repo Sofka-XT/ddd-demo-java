@@ -4,16 +4,18 @@ import co.com.sofka.domain.generic.Command;
 
 import java.util.Map;
 
-public class CrearJuegoCommand implements Command {
+public class CrearJuegoCommand extends Command {
     private Integer kilometros;
+    private String juegoId;
     private Map<String, String> jugadores;
 
     public CrearJuegoCommand() {
     }
 
 
-    public CrearJuegoCommand(Integer kilometros, Map<String, String> jugadores) {
+    public CrearJuegoCommand(Integer kilometros, String juegoId, Map<String, String> jugadores) {
         this.kilometros = kilometros;
+        this.juegoId = juegoId;
         this.jugadores = jugadores;
 
     }
@@ -34,4 +36,11 @@ public class CrearJuegoCommand implements Command {
         this.kilometros = kilometros;
     }
 
+    public String getJuegoId() {
+        return juegoId;
+    }
+
+    public void setJuegoId(String juegoId) {
+        this.juegoId = juegoId;
+    }
 }

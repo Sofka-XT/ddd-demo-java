@@ -46,11 +46,11 @@ public class NATSEventBus implements EventBus {
     @Override
     public void publishError(ErrorEvent errorEvent) {
 
-        if (errorEvent.error instanceof BusinessException)
+        if (errorEvent.error instanceof BusinessException) {
             publishToTopic(TOPIC_BUSINESS_ERROR, errorEvent);
-        else
+        } else {
             publishToTopic(TOPIC_ERROR, errorEvent);
-
+        }
         logger.log(Level.SEVERE, errorEvent.error.getMessage());
 
     }

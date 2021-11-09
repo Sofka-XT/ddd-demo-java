@@ -27,7 +27,7 @@ class MoverCarroUseCaseTest extends UseCaseHandleBaseTest {
         when(repository.getEventsBy("MX5124")).thenReturn(List.of(
                 new CarroCreado(CarroId.of("MX5124"), JuegoId.of("xxxx"), new Color("rojo")),
                 new ConductorAsignado("Raul A. Alzate", Cedula.of("3188452152")),
-                new KilometrajeCambiado(20, CarrilId.of("xxxx-xxxx"))
+                new KilometrajeCambiado(20, CarrilId.of("xxxx-xxxx"),  JuegoId.of("xxxsf"))
         ));
         useCase.addRepository(repository);
 

@@ -6,7 +6,7 @@ import co.com.sofka.domain.generic.Command;
 
 import java.util.Objects;
 
-public class AsignarConductorCommand implements Command {
+public class AsignarConductorCommand extends Command {
     private String nombre;
     private Cedula cedula;
     private CarroId carroId;
