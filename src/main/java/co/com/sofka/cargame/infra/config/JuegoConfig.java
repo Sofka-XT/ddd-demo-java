@@ -54,7 +54,7 @@ public class JuegoConfig {
     }
 
     @Bean
-    public Set<UseCase.UseCaseWrap> useCases(
+    public Set<UseCase.UseCaseWrap> listUseCasesForListener(
             AsinarAPodioUseCase asinarAPodioUseCase,
             CrearCarrilUseCase crearCarrilUseCase,
             CrearCarroUseCase crearCarroUseCase,
