@@ -12,7 +12,7 @@ import co.com.sofka.cargame.domain.juego.values.JuegoId;
 import co.com.sofka.cargame.domain.juego.values.JugadorId;
 import co.com.sofka.cargame.domain.juego.values.Nombre;
 import co.com.sofka.cargame.domain.juego.values.Pista;
-import co.com.sofka.cargame.usecase.UseCaseHandleBaseTest;
+import co.com.sofka.cargame.UseCaseHandleBaseTest;
 import co.com.sofka.cargame.usecase.services.CarroService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

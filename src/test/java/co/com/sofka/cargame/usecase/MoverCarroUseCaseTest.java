@@ -2,6 +2,7 @@ package co.com.sofka.cargame.usecase;
 
 import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.support.RequestCommand;
+import co.com.sofka.cargame.UseCaseHandleBaseTest;
 import co.com.sofka.cargame.domain.Color;
 import co.com.sofka.cargame.domain.carril.values.CarrilId;
 import co.com.sofka.cargame.domain.carro.command.MoverCarroCommand;

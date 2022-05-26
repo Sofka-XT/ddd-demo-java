@@ -8,7 +8,7 @@ import co.com.sofka.cargame.domain.juego.events.JuegoFinalizado;
 import co.com.sofka.cargame.domain.juego.values.JugadorId;
 import co.com.sofka.cargame.domain.juego.values.Nombre;
 import co.com.sofka.cargame.domain.juego.values.Podio;
-import co.com.sofka.cargame.usecase.UseCaseHandleBaseTest;
+import co.com.sofka.cargame.UseCaseHandleBaseTest;
 import org.junit.jupiter.api.Test;
 
 

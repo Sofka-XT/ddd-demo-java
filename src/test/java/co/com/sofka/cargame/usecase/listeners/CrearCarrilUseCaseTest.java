@@ -9,7 +9,7 @@ import co.com.sofka.cargame.domain.carril.events.CarroAgregadoACarrail;
 import co.com.sofka.cargame.domain.carro.events.CarroCreado;
 import co.com.sofka.cargame.domain.carro.values.CarroId;
 import co.com.sofka.cargame.domain.juego.values.JuegoId;
-import co.com.sofka.cargame.usecase.UseCaseHandleBaseTest;
+import co.com.sofka.cargame.UseCaseHandleBaseTest;
 import co.com.sofka.cargame.usecase.services.JuegoService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;

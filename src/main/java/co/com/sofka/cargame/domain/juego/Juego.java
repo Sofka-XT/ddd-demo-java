@@ -1,6 +1,8 @@
 package co.com.sofka.cargame.domain.juego;
 
 import co.com.sofka.cargame.domain.Color;
+import co.com.sofka.cargame.domain.carril.values.CarrilId;
+import co.com.sofka.cargame.domain.carro.values.CarroId;
 import co.com.sofka.cargame.domain.juego.events.*;
 import co.com.sofka.cargame.domain.juego.values.*;
 import co.com.sofka.domain.generic.AggregateEvent;
@@ -37,6 +39,10 @@ public class Juego extends AggregateEvent<JuegoId> {
         appendChange(new JugadorCreado(jugadorId, nombre, color)).apply();
     }
 
+    public void iniciarJuegoACompetidor(CarroId carroId, CarrilId carrilId){
+        appendChange(new CompetidorIniciado(carroId, carrilId)).apply();
+    }
+
     public void asignarPrimerLugar(JugadorId jugadorId) {
         appendChange(new PrimerLugarAsignado(jugadorId)).apply();
     }
@@ -68,5 +74,15 @@ public class Juego extends AggregateEvent<JuegoId> {
 
     public Podio.Props podio() {
         return podio.value();
+    }
+
+    @Override
+    public String toString() {
+        return "Juego{" +
+                "jugadores=" + jugadores +
+                ", pista=" + pista +
+                ", jugando=" + jugando +
+                ", podio=" + podio +
+                '}';
     }
 }

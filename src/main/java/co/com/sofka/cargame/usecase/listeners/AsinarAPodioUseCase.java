@@ -10,9 +10,12 @@ import co.com.sofka.cargame.usecase.services.CarroService;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
+import java.util.logging.Logger;
 
 @Component
 public class AsinarAPodioUseCase extends UseCase<TriggeredEvent<CarroFinalizoSuRecorrido>, ResponseEvents> {
+    private static final Logger logger = Logger.getLogger(AsinarAPodioUseCase.class.getName());
+
     @Override
     public void executeUseCase(TriggeredEvent<CarroFinalizoSuRecorrido> triggeredEvent) {
         var event = triggeredEvent.getDomainEvent();
@@ -23,10 +26,13 @@ public class AsinarAPodioUseCase extends UseCase<TriggeredEvent<CarroFinalizoSuR
 
         if (Objects.isNull(juego.podio().primerLugar())) {
             juego.asignarPrimerLugar(JugadorId.of(conductorId));
+            logger.info("Primer lugar encontrado");
         } else if (Objects.isNull(juego.podio().segundoLugar())) {
             juego.asignarSegundoLugar(JugadorId.of(conductorId));
+            logger.info("Segundo lugar encontrado");
         } else if (Objects.isNull(juego.podio().tercerLugar())) {
             juego.asignarTercerLugar(JugadorId.of(conductorId));
+            logger.info("Tercero lugar encontrado");
         }
         emit().onResponse(new ResponseEvents(juego.getUncommittedChanges()));
     }

@@ -22,33 +22,21 @@ public class MotorJuegoUseCase extends UseCase<TriggeredEvent<JuegoIniciado>, Re
         var event = triggeredEvent.getDomainEvent();
         var juegoId = JuegoId.of(event.aggregateRootId());
         var carrilCarroService = getService(CarrilCarroService.class).orElseThrow();
-        var moverCarroService = getService(MoverCarroService.class).orElseThrow();
         var competidores = carrilCarroService.getCarrosSobreCarriles(juegoId);
-        boolean jugando;
-        if (!competidores.isEmpty()) {
-            do {
+        var juego = Juego.from(juegoId, retrieveEvents());
 
+        if (!competidores.isEmpty()) {
                 competidores.forEach(carroSobreCarril -> {
-                    moverCarroService.mover(
+                    juego.iniciarJuegoACompetidor(
                             CarroId.of(carroSobreCarril.getCarroId()),
                             CarrilId.of(carroSobreCarril.getCarrilId())
                     );
-                    esperar4Segundos();
                 });
-
-                jugando = Juego.from(juegoId, retrieveEvents()).jugando();
-            } while (jugando);
         }
 
-        emit().onResponse(new ResponseEvents(List.of()));
+
+        emit().onResponse(new ResponseEvents(juego.getUncommittedChanges()));
     }
 
-    private void esperar4Segundos() {
-        try {
-            Thread.sleep(4000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
 
 }

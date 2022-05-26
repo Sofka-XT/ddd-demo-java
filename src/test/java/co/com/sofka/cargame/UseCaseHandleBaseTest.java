@@ -1,4 +1,4 @@
-package co.com.sofka.cargame.usecase;
+package co.com.sofka.cargame;
 
 import co.com.sofka.business.generic.BusinessException;
 import co.com.sofka.business.repository.DomainEventRepository;

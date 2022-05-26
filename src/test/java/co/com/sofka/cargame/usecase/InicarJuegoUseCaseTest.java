@@ -2,10 +2,10 @@ package co.com.sofka.cargame.usecase;
 
 import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.support.RequestCommand;
+import co.com.sofka.cargame.UseCaseHandleBaseTest;
 import co.com.sofka.cargame.domain.juego.command.InicarJuegoCommand;
 import co.com.sofka.cargame.domain.juego.events.JuegoCreado;
 import co.com.sofka.cargame.domain.juego.events.JuegoIniciado;
-import co.com.sofka.cargame.domain.juego.values.JuegoId;
 import co.com.sofka.cargame.domain.juego.values.Pista;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

@@ -17,7 +17,7 @@ import co.com.sofka.cargame.domain.juego.values.JuegoId;
 import co.com.sofka.cargame.domain.juego.values.Pista;
 import co.com.sofka.cargame.domain.juego.values.Podio;
 import co.com.sofka.cargame.usecase.MoverCarroUseCase;
-import co.com.sofka.cargame.usecase.UseCaseHandleBaseTest;
+import co.com.sofka.cargame.UseCaseHandleBaseTest;
 import co.com.sofka.cargame.usecase.model.CarroSobreCarril;
 import co.com.sofka.cargame.usecase.services.CarrilCarroService;
 import co.com.sofka.domain.generic.DomainEvent;
@@ -54,6 +54,7 @@ class MotorJuegoUseCaseTest extends UseCaseHandleBaseTest {
         moverCarroUseCase.addRepository(repository);
     }
 
+    //TODO:  Revisar el problema
     @Test
     void correrJuego() {
         var juegoIniciado = new JuegoIniciado();

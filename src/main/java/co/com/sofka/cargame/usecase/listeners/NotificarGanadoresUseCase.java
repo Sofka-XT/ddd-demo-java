@@ -17,8 +17,8 @@ public class NotificarGanadoresUseCase extends UseCase<TriggeredEvent<JuegoFinal
     public void executeUseCase(TriggeredEvent<JuegoFinalizado> triggeredEvent) {
         var event = triggeredEvent.getDomainEvent();
         var podioPros = event.getPodio().value();
-        logger.info("--------------- PrimerLugar:" + podioPros.primerLugar().nombre().value());
-        logger.info("------------ SegundoLugar:" + podioPros.segundoLugar().nombre().value());
+        logger.info("--------------- Primer Lugar:" + podioPros.primerLugar().nombre().value());
+        logger.info("------------ Segundo Lugar:" + podioPros.segundoLugar().nombre().value());
         logger.info(" ----- Tercer Lugar:" + podioPros.tercerLugar().nombre().value());
         emit().onResponse(new ResponseEvents(List.of()));
     }

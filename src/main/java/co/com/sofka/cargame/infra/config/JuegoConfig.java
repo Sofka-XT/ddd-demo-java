@@ -60,7 +60,8 @@ public class JuegoConfig {
             CrearCarroUseCase crearCarroUseCase,
             MotorJuegoUseCase motorJuegoUseCase,
             MoverCarroEnCarrilUseCase moverCarroEnCarrilUseCase,
-            NotificarGanadoresUseCase notificarGanadoresUseCase
+            NotificarGanadoresUseCase notificarGanadoresUseCase,
+            IniciarCompetidoUseCase iniciarCompetidoUseCase
     ) {
         return Set.of(
                 new UseCase.UseCaseWrap("carril.CarroFinalizoSuRecorrido", (UseCase) asinarAPodioUseCase),
@@ -68,7 +69,8 @@ public class JuegoConfig {
                 new UseCase.UseCaseWrap("juego.JugadorCreado", (UseCase) crearCarroUseCase),
                 new UseCase.UseCaseWrap("juego.JuegoIniciado", (UseCase) motorJuegoUseCase),
                 new UseCase.UseCaseWrap("carro.KilometrajeCambiado", (UseCase) moverCarroEnCarrilUseCase),
-                new UseCase.UseCaseWrap("juego.JuegoFinalizado", (UseCase) notificarGanadoresUseCase)
+                new UseCase.UseCaseWrap("juego.JuegoFinalizado", (UseCase) notificarGanadoresUseCase),
+                new UseCase.UseCaseWrap("juego.CompetidorIniciado", (UseCase) iniciarCompetidoUseCase)
         );
     }
 

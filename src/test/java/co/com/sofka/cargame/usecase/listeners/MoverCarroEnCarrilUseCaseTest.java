@@ -11,7 +11,7 @@ import co.com.sofka.cargame.domain.carril.values.Posicion;
 import co.com.sofka.cargame.domain.carro.events.KilometrajeCambiado;
 import co.com.sofka.cargame.domain.carro.values.CarroId;
 import co.com.sofka.cargame.domain.juego.values.JuegoId;
-import co.com.sofka.cargame.usecase.UseCaseHandleBaseTest;
+import co.com.sofka.cargame.UseCaseHandleBaseTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
